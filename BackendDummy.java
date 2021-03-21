@@ -129,21 +129,21 @@ public class BackendDummy implements BackendInterface {
     @Override
     public List<HighScoreInterface> getHighScores(double time) {
         return getAllScores().stream()
-                .filter(it -> it.getTime() >= time)
+                .filter(it -> it.getTime() <= time)
                 .collect(Collectors.toList());
     }
 
     @Override
     public HighScoreInterface getFastestScore() {
         return getAllScores().stream()
-                .sorted((a, b) -> ((Double)b.getTime()).compareTo(a.getTime()))
+                .sorted((a, b) -> ((Double)a.getTime()).compareTo(b.getTime()))
                 .findFirst().orElse(null);
     }
 
     @Override
     public HighScoreInterface getSlowestScore() {
         return getAllScores().stream()
-                .sorted((a, b) -> ((Double)a.getTime()).compareTo(b.getTime()))
+                .sorted((a, b) -> ((Double)b.getTime()).compareTo(a.getTime()))
                 .findFirst().orElse(null);
     }
 

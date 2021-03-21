@@ -5,12 +5,18 @@ public class Frontend {
     public static void main(String[] args) {
         System.out.println("Welcome to the video game high score manager app.");
         BackendInterface backendInterface = new BackendDummy();
-        new Frontend().run(backendInterface);
+        Frontend frontend = new Frontend();
+        frontend.init();
+        frontend.run(backendInterface);
     }
 
     private Scanner input;
 
     public Frontend() {
+
+    }
+
+    public void init() {
         input = new Scanner(System.in);
     }
 
@@ -119,6 +125,7 @@ public class Frontend {
     public void searchByUser(BackendInterface backendInterface) {
         System.out.print("Enter User: ");
         String user = input.nextLine().trim().toLowerCase();
+        System.out.println("Searching by User (" + user + "):");
 
         System.out.println();
         printHeaders(backendInterface);

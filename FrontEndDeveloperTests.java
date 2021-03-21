@@ -19,6 +19,7 @@ public class FrontEndDeveloperTests {
             System.setOut(new PrintStream(outputStreamCaptor));
 
             BackendInterface backend = new BackendDummy(); // TODO: replace with real backend?
+            frontend.init();
             frontend.run(backend);
 
             assertTrue(outputTest.test(outputStreamCaptor.toString()));
@@ -43,22 +44,22 @@ public class FrontEndDeveloperTests {
 
     @Test
     public void testGetHighScores() {
-        runTest("h\nx\n", output -> output.contains("High Scores:") && output.contains("siglemic"));
+        runTest("h\n7000\nx\n", output -> output.contains("High Scores:") && output.contains("siglemic"));
     }
 
     @Test
     public void testGetFastest() {
-        runTest("f\nx\n", output -> output.contains("Fastest score:") && output.contains("siglemic"));
+        runTest("f\nx\n", output -> output.contains("Fastest Score:") && output.contains("siglemic"));
     }
 
     @Test
     public void testGetSlowest() {
-        runTest("s\nx\n", output -> output.contains("Slowest score:") && output.contains("toastrider"));
+        runTest("s\nx\n", output -> output.contains("Slowest Score:") && output.contains("toastrider"));
     }
 
     @Test
     public void testGetPlayer() {
-        runTest("u\ncheese\nx\n", output -> output.contains("Searching by user (cheese): ") && output.contains("2014"));
+        runTest("u\ncheese\nx\n", output -> output.contains("Searching by User (cheese):") && output.contains("2014"));
     }
 }
 
