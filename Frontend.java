@@ -6,18 +6,19 @@
 // TA: Dan Kiel
 // Lecturer: Florian Heimerl
 
+import java.io.FileReader;
 import java.util.Scanner;
 
 /*
     The frontend class is the interface used to run the app.
  */
 public class Frontend {
-        /*
-        The main method is the entrypoint, it constructs a backend and calls the run method.
-         */
+    /*
+    The main method is the entrypoint, it constructs a backend and calls the run method.
+     */
     public static void main(String[] args) {
         System.out.println("Welcome to the video game high score manager app.");
-        BackendInterface backendInterface = new BackendDummy();
+        BackendInterface backendInterface = new Backend(new FileReader("Project2TextFile.txt"));
         Frontend frontend = new Frontend();
         frontend.init();
         frontend.run(backendInterface);
@@ -47,7 +48,7 @@ public class Frontend {
 
         String command = input.nextLine();
 
-        switch(command.trim().toLowerCase().charAt(0)) {
+        switch (command.trim().toLowerCase().charAt(0)) {
             case 'a':
                 getAllScores(backendInterface);
                 break;
