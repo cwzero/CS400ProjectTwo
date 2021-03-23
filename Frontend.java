@@ -1,7 +1,20 @@
+// --== CS400 File Header Information ==--
+// Name: Eric Gjerde
+// Email: egjerde@wisc.edu
+// Team: DE blue
+// Role: Frontend Developer
+// TA: Dan Kiel
+// Lecturer: Florian Heimerl
+
 import java.util.Scanner;
 
-// Frontend class - currently a stub
+/*
+    The frontend class is the interface used to run the app.
+ */
 public class Frontend {
+        /*
+        The main method is the entrypoint, it constructs a backend and calls the run method.
+         */
     public static void main(String[] args) {
         System.out.println("Welcome to the video game high score manager app.");
         BackendInterface backendInterface = new BackendDummy();
@@ -12,14 +25,16 @@ public class Frontend {
 
     private Scanner input;
 
-    public Frontend() {
-
-    }
-
+    /*
+    This was a quick fix for needing to create the scanner after the System.setIn in the tests
+     */
     public void init() {
         input = new Scanner(System.in);
     }
 
+    /*
+    The core of the frontend.  Prompts for commands to run, calls the appropriate method, recursive.
+     */
     public void run(BackendInterface backendInterface) {
         System.out.println("Commands:");
         System.out.println("a: Get all scores");
@@ -58,6 +73,9 @@ public class Frontend {
         }
     }
 
+    /*
+    Part of the output format, creates headers for the table the scores will be shown in
+     */
     public void printHeaders(BackendInterface backendInterface) {
         System.out.format("%-16s\t%-8s\t%-8s\t%-16s\t%-28s\n",
                 "Player",
@@ -67,6 +85,9 @@ public class Frontend {
                 "Date Completed");
     }
 
+    /*
+    Prints an individual row in the table for a given record
+     */
     public void printScore(BackendInterface backendInterface, HighScoreInterface highScore) {
         System.out.format("%-16s\t%-8.2f\t%-8b\t%-16s\t%-28s\n",
                 highScore.getPlayer(),
@@ -76,6 +97,9 @@ public class Frontend {
                 highScore.getDateRunCompleted().toString());
     }
 
+    /*
+    Command method: a = get all scores
+     */
     public void getAllScores(BackendInterface backendInterface) {
         System.out.println("All Scores:");
         System.out.println();
@@ -87,6 +111,9 @@ public class Frontend {
         run(backendInterface);
     }
 
+    /*
+    Command method: h = get high scores(under a given time)
+     */
     public void getHighScores(BackendInterface backendInterface) {
         System.out.print("Enter time to request: ");
         double time = Double.parseDouble(input.nextLine().trim());
@@ -100,6 +127,9 @@ public class Frontend {
         run(backendInterface);
     }
 
+    /*
+    Command method: f = get fastest score
+     */
     public void getFastestScore(BackendInterface backendInterface) {
         System.out.println("Fastest Score:");
 
@@ -111,6 +141,9 @@ public class Frontend {
         run(backendInterface);
     }
 
+    /*
+    Command method: s = get slowest score
+     */
     public void getSlowestScore(BackendInterface backendInterface) {
         System.out.println("Slowest Score:");
 
@@ -122,6 +155,9 @@ public class Frontend {
         run(backendInterface);
     }
 
+    /*
+    Command method: s = get slowest score
+     */
     public void searchByUser(BackendInterface backendInterface) {
         System.out.print("Enter User: ");
         String user = input.nextLine().trim().toLowerCase();
@@ -135,6 +171,9 @@ public class Frontend {
         run(backendInterface);
     }
 
+    /*
+    Command method: x = exit
+     */
     public void exit() {
         input.close();
     }
